@@ -15,9 +15,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  bloc: ^8.1.0
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.1
   rxdart: ^0.27.5
+  
 
 dev_dependencies:
   flutter_test:
