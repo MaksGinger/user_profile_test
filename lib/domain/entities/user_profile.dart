@@ -6,7 +6,8 @@ class UserProfile {
     required this.email,
     required this.birthday,
     required this.subscriptionStatus,
-    required this.profilePictureUrl,
+    this.profilePictureUrl =
+        'https://docs.flutter.dev/assets/images/dash/Dash.png',
   });
 
   final String name;
@@ -20,7 +21,5 @@ class UserProfile {
         email: 'ben@gmail.com',
         birthday: DateTime(1995, 4, 5),
         subscriptionStatus: SubscriptionStatus.yes,
-        profilePictureUrl:
-            'https://docs.flutter.dev/assets/images/dash/Dash.png',
       );
 }
