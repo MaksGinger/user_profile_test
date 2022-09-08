@@ -1,18 +1,17 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:user_profile_test/bloc/app_bloc_observer.dart';
+import 'package:user_profile_test/ui/app.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Demo',
-      home: SizedBox(),
-    );
-  }
+  runZonedGuarded(
+    () {
+      Bloc.observer = AppBlocObserver();
+      runApp(const App());
+    },
+    (error, stackTrace) => log('$error $stackTrace'),
+  );
 }
