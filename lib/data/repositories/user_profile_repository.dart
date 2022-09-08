@@ -18,8 +18,7 @@ class UserProfileRepository implements IUserProfileRepository {
   Stream<UserProfile> loadUserProfile() => _userProfileDataSource;
 
   @override
-  Stream<UserProfile> saveUserProfile({required UserProfile userProfile}) {
+  void saveUserProfile({required UserProfile userProfile}) {
     _userProfileDataSource.add(userProfile);
-    return loadUserProfile();
   }
 }

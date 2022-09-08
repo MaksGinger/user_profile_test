@@ -25,12 +25,9 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
       (event, emit) async {
         emit(const UserProfileLoadingState());
 
-        await emit.forEach(
-          userProfileRepository.saveUserProfile(userProfile: event.userProfile),
-          onData: (userProfile) =>
-              UserProfileLoadedState(userProfile: userProfile),
-          onError: (_, __) => const UserProfileErrorState(),
-        );
+        userProfileRepository.saveUserProfile(userProfile: event.userProfile);
+
+        add(const LoadUserProfileEvent());
       },
     );
   }
