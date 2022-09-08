@@ -14,4 +14,13 @@ class UserProfile {
     required this.subscriptionStatus,
     required this.profilePictureUrl,
   });
+
+  factory UserProfile.byDefault() => UserProfile(
+        name: 'Ben',
+        email: 'ben@gmail.com',
+        birthday: DateTime(1995, 4, 5),
+        subscriptionStatus: SubscriptionStatus.yes,
+        profilePictureUrl:
+            'https://docs.flutter.dev/assets/images/dash/Dash.png',
+      );
 }
