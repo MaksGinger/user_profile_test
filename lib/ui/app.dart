@@ -19,16 +19,12 @@ class App extends StatelessWidget {
         ),
         body: RepositoryProvider<IUserProfileRepository>(
           create: (context) => UserProfileRepository(),
-          child: Builder(
-            builder: (context) {
-              return BlocProvider(
-                create: (context) => UserProfileBloc(
-                  userProfileRepository:
-                      RepositoryProvider.of<IUserProfileRepository>(context),
-                ),
-                child: const UserProfileData(),
-              );
-            },
+          child: BlocProvider(
+            create: (context) => UserProfileBloc(
+              userProfileRepository:
+                  RepositoryProvider.of<IUserProfileRepository>(context),
+            ),
+            child: const UserProfileData(),
           ),
         ),
       ),
