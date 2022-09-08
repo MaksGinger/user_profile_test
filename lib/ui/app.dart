@@ -36,14 +36,28 @@ class App extends StatelessWidget {
   }
 }
 
-class UserProfileData extends StatelessWidget {
+class UserProfileData extends StatefulWidget {
   const UserProfileData({super.key});
+
+  @override
+  State<UserProfileData> createState() => _UserProfileDataState();
+}
+
+class _UserProfileDataState extends State<UserProfileData> {
+  @override
+  void initState() {
+    BlocProvider.of<UserProfileBloc>(context).add(
+      const LoadUserProfileEvent(),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserProfileBloc, UserProfileState>(
       builder: (context, state) {
-        return const SizedBox();
+        if (state is UserProfileLoadedState) {}
+        return const SizedBox.shrink();
       },
     );
   }
