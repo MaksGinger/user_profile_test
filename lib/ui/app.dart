@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:user_profile_test/bloc/user_profile/user_profile_bloc.dart';
+import 'package:user_profile_test/data/repositories/i_user_profile_repository.dart';
+import 'package:user_profile_test/data/repositories/user_profile_repository.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -7,11 +11,40 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
       home: Scaffold(
-        body: SizedBox(),
+        appBar: AppBar(
+          title: const Text(_title),
+        ),
+        body: RepositoryProvider<IUserProfileRepository>(
+          create: (context) => UserProfileRepository(),
+          child: Builder(
+            builder: (context) {
+              return BlocProvider(
+                create: (context) => UserProfileBloc(
+                  userProfileRepository:
+                      RepositoryProvider.of<IUserProfileRepository>(context),
+                ),
+                child: const UserProfileData(),
+              );
+            },
+          ),
+        ),
       ),
+    );
+  }
+}
+
+class UserProfileData extends StatelessWidget {
+  const UserProfileData({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserProfileBloc, UserProfileState>(
+      builder: (context, state) {
+        return const SizedBox();
+      },
     );
   }
 }
