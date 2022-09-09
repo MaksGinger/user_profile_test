@@ -59,12 +59,7 @@ void main() {
       ],
     );
 
-    final newProfile = UserProfile(
-      name: 'name',
-      birthday: DateTime(2000, 9, 7),
-      email: 'email',
-      subscriptionStatus: SubscriptionStatus.no,
-    );
+    final newProfile = defaultProfile.copyWith(name: 'name');
 
     blocTest(
       'when SaveUserProfileEvent, Error state emits',

@@ -22,4 +22,19 @@ class UserProfile {
         birthday: DateTime(1995, 4, 5),
         subscriptionStatus: SubscriptionStatus.yes,
       );
+
+  UserProfile copyWith({
+    String? name,
+    String? email,
+    DateTime? birthday,
+    SubscriptionStatus? subscriptionStatus,
+    String? profilePictureUrl,
+  }) =>
+      UserProfile(
+        name: name ?? this.name,
+        email: email ?? this.email,
+        birthday: birthday ?? this.birthday,
+        subscriptionStatus: subscriptionStatus ?? this.subscriptionStatus,
+        profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
+      );
 }
