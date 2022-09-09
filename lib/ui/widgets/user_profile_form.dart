@@ -83,29 +83,15 @@ class _UserProfileFormState extends State<UserProfileForm> {
           const Center(
             child: Text('Choose your subscription status:'),
           ),
-          ListTile(
-            title: Text(SubscriptionStatus.yes.name),
-            leading: Radio<SubscriptionStatus>(
-              value: SubscriptionStatus.yes,
-              groupValue: _subscriptionStatus,
-              onChanged: (status) {
-                if (status != null) {
-                  setState(() => _subscriptionStatus = status);
-                }
-              },
-            ),
+          _SubscriptionStatusRadio(
+            subscriptionStatus: _subscriptionStatus,
+            radioValue: SubscriptionStatus.yes,
+            onChangeStatus: _changeStatus,
           ),
-          ListTile(
-            title: Text(SubscriptionStatus.no.name),
-            leading: Radio<SubscriptionStatus>(
-              value: SubscriptionStatus.no,
-              groupValue: _subscriptionStatus,
-              onChanged: (status) {
-                if (status != null) {
-                  setState(() => _subscriptionStatus = status);
-                }
-              },
-            ),
+          _SubscriptionStatusRadio(
+            subscriptionStatus: _subscriptionStatus,
+            radioValue: SubscriptionStatus.no,
+            onChangeStatus: _changeStatus,
           ),
         ],
       ),
@@ -130,6 +116,39 @@ class _UserProfileFormState extends State<UserProfileForm> {
           child: const Text('Confirm'),
         )
       ],
+    );
+  }
+
+  void _changeStatus(SubscriptionStatus status) {
+    setState(() => _subscriptionStatus = status);
+  }
+}
+
+class _SubscriptionStatusRadio extends StatelessWidget {
+  const _SubscriptionStatusRadio({
+    Key? key,
+    required this.subscriptionStatus,
+    required this.radioValue,
+    required this.onChangeStatus,
+  }) : super(key: key);
+
+  final SubscriptionStatus subscriptionStatus;
+  final void Function(SubscriptionStatus newStatus) onChangeStatus;
+  final SubscriptionStatus radioValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(radioValue.name),
+      leading: Radio<SubscriptionStatus>(
+        value: radioValue,
+        groupValue: subscriptionStatus,
+        onChanged: (status) {
+          if (status != null) {
+            onChangeStatus(status);
+          }
+        },
+      ),
     );
   }
 }
